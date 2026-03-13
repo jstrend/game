@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>팀 O/X 퀴즈</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== SETUP SCREEN ==================== -->
+  <div id="screen-setup" class="screen active">
+    <div class="page-header">
+      <h1 class="logo">팀 O/X 퀴즈</h1>
+      <p class="subtitle">워크샵 팀 대결</p>
+    </div>
+
+    <div class="setup-grid">
+
+      <!-- 문제 관리 -->
+      <div class="card">
+        <h2 class="card-title">문제 설정</h2>
+
+        <!-- 문제 은행 -->
+        <div class="bank-header">
+          <span class="bank-label">📚 문제 은행 <small>클릭해서 선택</small></span>
+          <div class="bank-actions">
+            <button class="btn btn-ghost-sm" onclick="selectAllBank()">전체 선택</button>
+            <button class="btn btn-ghost-sm" onclick="deselectAllBank()">전체 해제</button>
+          </div>
+        </div>
+        <ul id="bank-list" class="bank-list"></ul>
+
+        <!-- 선택된 문제 -->
+        <div class="question-list-header" style="margin-top:16px">
+          <span>✅ 선택된 문제</span>
+          <span id="question-count" class="badge">0 / 20</span>
+        </div>
+        <ul id="question-list" class="question-list"></ul>
+
+        <!-- 직접 입력 -->
+        <details class="custom-input-details">
+          <summary>✏️ 직접 문제 추가</summary>
+          <div class="question-input-area">
+            <textarea id="new-question-text" placeholder="질문을 입력하세요..." rows="3"></textarea>
+            <div class="answer-row">
+              <span class="label">정답</span>
+              <button class="answer-btn" id="answer-btn-o" data-val="O" onclick="selectAnswer('O')">O</button>
+              <button class="answer-btn" id="answer-btn-x" data-val="X" onclick="selectAnswer('X')">X</button>
+              <input type="hidden" id="new-question-answer" value="" />
+            </div>
+            <button class="btn btn-primary" onclick="addQuestion()">문제 추가</button>
+          </div>
+        </details>
+      </div>
+
+      <!-- 팀 설정 -->
+      <div class="card">
+        <h2 class="card-title">팀 설정</h2>
+
+        <div class="team-input-row">
+          <input type="text" id="new-team-name" placeholder="팀 이름 입력" maxlength="12" />
+          <button class="btn btn-primary" onclick="addTeam()">추가</button>
+        </div>
+
+        <ul id="team-list" class="team-list"></ul>
+
+        <div class="team-hint">최소 2팀 · 최대 6팀</div>
+
+        <button class="btn btn-start" id="start-btn" onclick="startGame()">게임 시작</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== GAME SCREEN ==================== -->
+  <div id="screen-game" class="screen">
+
+    <div class="game-header">
+      <div class="progress-info">
+        <span id="game-q-index">1</span> / <span id="game-q-total">10</span> 문제
+      </div>
+      <button class="btn btn-ghost" onclick="goSetup()">← 설정으로</button>
+    </div>
+
+    <!-- 문제 표시 -->
+    <div class="question-display card" id="question-display">
+      <div class="q-number" id="q-number">Q1</div>
+      <div class="q-text" id="q-text">문제가 여기 표시됩니다.</div>
+    </div>
+
+    <!-- O / X 버튼 -->
+    <div class="ox-buttons">
+      <button class="ox-btn ox-o" id="ox-o-btn">O</button>
+      <button class="ox-btn ox-x" id="ox-x-btn">X</button>
+    </div>
+
+    <!-- 팀 선택 영역 -->
+    <div class="team-selection-area card" id="team-selection-area">
+      <div class="team-selection-title">각 팀의 답을 선택하세요</div>
+      <div class="team-selection-grid" id="team-selection-grid"></div>
+    </div>
+
+    <!-- 정답 확인 버튼 -->
+    <div class="game-actions">
+      <button class="btn btn-reveal" id="reveal-btn" onclick="revealAnswer()">정답 확인</button>
+      <button class="btn btn-next" id="next-btn" onclick="nextQuestion()" style="display:none">다음 문제 →</button>
+    </div>
+
+    <!-- 정답 배너 -->
+    <div id="answer-banner" class="answer-banner hidden">
+      <span id="answer-banner-text"></span>
+    </div>
+
+    <!-- 생존 팀 현황 -->
+    <div class="survivors-bar card" id="survivors-bar">
+      <div class="survivors-title">생존 팀</div>
+      <div class="survivors-list" id="survivors-list"></div>
+    </div>
+
+  </div>
+
+  <!-- ==================== RESULT SCREEN ==================== -->
+  <div id="screen-result" class="screen">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="result-content">
+      <div id="result-trophy">🏆</div>
+      <h2 id="result-title">우승!</h2>
+      <div id="result-winner" class="result-winner-name"></div>
+      <p id="result-subtitle"></p>
+      <button class="btn btn-start" onclick="resetGame()">다시 시작</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

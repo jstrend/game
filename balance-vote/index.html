@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>밸런스 게임 투표</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-inner">
+      <h1 class="logo">⚖️ 밸런스 게임</h1>
+      <div class="header-actions">
+        <button class="btn-icon" id="btnManage" title="문제 관리">📋</button>
+        <button class="btn-icon" id="btnSound" title="사운드 토글">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN APP ===== -->
+  <main class="app-main">
+
+    <!-- Progress bar -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-label" id="progressLabel">1 / 8</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Question card -->
+    <div class="question-card glass" id="questionCard">
+      <div class="question-number" id="questionNumber">Q.1</div>
+      <div class="question-text" id="questionText">문제를 불러오는 중...</div>
+    </div>
+
+    <!-- Vote area -->
+    <div class="vote-area" id="voteArea">
+      <button class="vote-btn vote-a" id="voteA">
+        <span class="choice-label">A</span>
+        <span class="choice-text" id="choiceA">선택지 A</span>
+      </button>
+      <div class="vs-divider">VS</div>
+      <button class="vote-btn vote-b" id="voteB">
+        <span class="choice-label">B</span>
+        <span class="choice-text" id="choiceB">선택지 B</span>
+      </button>
+    </div>
+
+    <!-- Result area (hidden initially) -->
+    <div class="result-area glass" id="resultArea" style="display:none;">
+      <div class="result-tie" id="resultTie" style="display:none;">🤝 팽팽한 대결!</div>
+      <div class="result-row" id="resultRowA">
+        <div class="result-choice-label result-a-label">A</div>
+        <div class="result-info">
+          <div class="result-choice-text" id="resultChoiceA">선택지 A</div>
+          <div class="result-bar-wrap">
+            <div class="result-bar result-bar-a" id="barA"></div>
+          </div>
+          <div class="result-stats" id="statsA">0표 · 0%</div>
+        </div>
+      </div>
+      <div class="result-row" id="resultRowB">
+        <div class="result-choice-label result-b-label">B</div>
+        <div class="result-info">
+          <div class="result-choice-text" id="resultChoiceB">선택지 B</div>
+          <div class="result-bar-wrap">
+            <div class="result-bar result-bar-b" id="barB"></div>
+          </div>
+          <div class="result-stats" id="statsB">0표 · 0%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="control-bar" id="controlBar">
+      <button class="btn-secondary" id="btnReveal" style="display:none;">결과 공개</button>
+      <button class="btn-secondary" id="btnReset">🔄 투표 리셋</button>
+      <button class="btn-primary" id="btnNext">다음 문제 →</button>
+    </div>
+
+  </main>
+
+  <!-- ===== MANAGE MODAL ===== -->
+  <div class="modal-overlay" id="manageModal" style="display:none;">
+    <div class="modal glass">
+      <div class="modal-header">
+        <h2>문제 관리</h2>
+        <button class="btn-icon" id="btnCloseModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Add custom question -->
+        <div class="add-form glass-inner">
+          <h3>새 질문 추가</h3>
+          <input class="form-input" id="inputQuestion" type="text" placeholder="질문 (예: 야근 vs 주말 출근)" />
+          <div class="form-row">
+            <input class="form-input" id="inputA" type="text" placeholder="A 선택지" />
+            <input class="form-input" id="inputB" type="text" placeholder="B 선택지" />
+          </div>
+          <button class="btn-primary" id="btnAddQuestion">추가하기</button>
+        </div>
+
+        <!-- Question list -->
+        <div class="question-list" id="questionList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

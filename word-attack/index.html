@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Attack - 타임어택 단어 게임</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== SETUP SCREEN ===== -->
+  <div id="screen-setup" class="screen active">
+    <div class="setup-container">
+      <div class="logo-area">
+        <h1 class="logo">⚡ WORD ATTACK</h1>
+        <p class="logo-sub">워크샵 타임어택 단어 게임</p>
+      </div>
+
+      <!-- 카테고리 설정 -->
+      <div class="card">
+        <h2 class="card-title">카테고리 설정</h2>
+        <div id="category-list" class="category-grid"></div>
+        <div class="add-category-row">
+          <input type="text" id="custom-category-input" placeholder="새 카테고리 입력..." maxlength="20" />
+          <button class="btn btn-secondary" onclick="addCustomCategory()">+ 추가</button>
+        </div>
+      </div>
+
+      <!-- 팀 설정 -->
+      <div class="card">
+        <h2 class="card-title">팀 설정</h2>
+        <div class="team-count-row">
+          <label>팀 수</label>
+          <div class="stepper">
+            <button class="stepper-btn" onclick="changeTeamCount(-1)">−</button>
+            <span id="team-count-display">2</span>
+            <button class="stepper-btn" onclick="changeTeamCount(1)">+</button>
+          </div>
+        </div>
+        <div id="team-inputs" class="team-inputs-grid"></div>
+      </div>
+
+      <!-- 라운드 설정 -->
+      <div class="card">
+        <h2 class="card-title">라운드 설정</h2>
+        <div class="round-row">
+          <div class="setting-item">
+            <label>총 라운드 수</label>
+            <div class="stepper">
+              <button class="stepper-btn" onclick="changeSetting('rounds', -1)">−</button>
+              <span id="rounds-display">5</span>
+              <button class="stepper-btn" onclick="changeSetting('rounds', 1)">+</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <label>타이머 (초)</label>
+            <div class="stepper">
+              <button class="stepper-btn" onclick="changeSetting('timer', -5)">−</button>
+              <span id="timer-display">30</span>
+              <button class="stepper-btn" onclick="changeSetting('timer', 5)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-large" onclick="startGame()">게임 시작 ▶</button>
+    </div>
+  </div>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <div id="screen-game" class="screen">
+    <!-- Scoreboard sidebar -->
+    <div id="scoreboard" class="scoreboard"></div>
+
+    <!-- Main game area -->
+    <div class="game-main">
+      <div class="round-badge" id="round-badge">ROUND 1 / 5</div>
+      <div class="current-team-label" id="current-team-label">팀A의 차례</div>
+
+      <!-- Timer canvas -->
+      <div class="timer-wrapper">
+        <canvas id="timer-canvas" width="260" height="260"></canvas>
+        <div class="timer-center" id="timer-center">
+          <span id="timer-number">30</span>
+          <span class="timer-unit">초</span>
+        </div>
+      </div>
+
+      <!-- Category display -->
+      <div class="category-display" id="category-display">
+        <div class="category-label">카테고리</div>
+        <div class="category-name" id="category-name">동물</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="game-controls" id="game-controls">
+        <button class="btn btn-primary btn-large" id="start-btn" onclick="startRound()">▶ 타이머 시작</button>
+      </div>
+
+      <!-- Score input (shown after timer ends) -->
+      <div class="score-input-area" id="score-input-area" style="display:none;">
+        <h3 class="score-input-title">각 팀의 단어 개수를 입력하세요</h3>
+        <div id="score-inputs-grid" class="score-inputs-grid"></div>
+        <button class="btn btn-primary btn-large" onclick="submitScores()">다음 라운드 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RESULT SCREEN ===== -->
+  <div id="screen-result" class="screen">
+    <div class="result-container">
+      <div class="winner-crown" id="winner-crown">🏆</div>
+      <h1 class="winner-title" id="winner-title">우승팀!</h1>
+      <div class="winner-name" id="winner-name">팀A</div>
+      <div class="final-scoreboard" id="final-scoreboard"></div>
+      <div class="result-btns">
+        <button class="btn btn-secondary btn-large" onclick="restartGame()">다시 하기</button>
+        <button class="btn btn-primary btn-large" onclick="goSetup()">설정으로</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🪜 사다리 게임</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🪜 사다리 게임</h1>
+      <p class="subtitle">공정한 추첨을 위한 비주얼 사다리</p>
+    </header>
+
+    <!-- 입력 섹션 -->
+    <section id="input-section" class="card">
+      <div class="input-group">
+        <h2>참가자</h2>
+        <div id="players-list" class="tag-list"></div>
+        <div class="input-row">
+          <input type="text" id="player-input" placeholder="이름 입력 후 Enter" maxlength="6">
+          <button id="add-player-btn" class="btn btn-secondary">추가</button>
+        </div>
+        <p class="hint">2~8명 참가 가능</p>
+      </div>
+
+      <div class="input-group" style="margin-top:4px">
+        <h2>결과 항목</h2>
+        <div id="results-list" class="tag-list"></div>
+        <div class="input-row">
+          <input type="text" id="result-input" placeholder="결과 입력 후 Enter" maxlength="6">
+          <button id="add-result-btn" class="btn btn-secondary">추가</button>
+        </div>
+        <p class="hint" id="count-hint">참가자 수와 결과 수가 같아야 합니다</p>
+      </div>
+
+      <button id="start-btn" class="btn btn-primary" disabled style="margin-top:8px">✨ 게임 시작</button>
+    </section>
+
+    <!-- 사다리 섹션 -->
+    <section id="ladder-section" class="card hidden">
+      <div id="player-labels" class="labels top-labels"></div>
+      <div class="canvas-wrapper">
+        <canvas id="ladder-canvas"></canvas>
+      </div>
+      <div id="result-labels" class="labels bottom-labels"></div>
+
+      <div class="btn-row">
+        <button id="animate-btn" class="btn btn-primary">▶ 경로 보기</button>
+        <button id="reset-btn" class="btn btn-secondary">🔀 다시 만들기</button>
+      </div>
+    </section>
+
+    <!-- 결과 섹션 -->
+    <section id="result-section" class="card hidden">
+      <h2>🎉 결과 발표</h2>
+      <table id="result-table">
+        <thead>
+          <tr><th>참가자</th><th>결과</th><th></th></tr>
+        </thead>
+        <tbody id="result-tbody"></tbody>
+      </table>
+      <div class="btn-row">
+        <button id="share-btn" class="btn btn-primary">🔗 결과 공유</button>
+        <button id="new-game-btn" class="btn btn-secondary">🆕 새 게임</button>
+      </div>
+      <p id="share-msg" class="share-msg hidden">링크가 클립보드에 복사됐습니다!</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 발표자 룰렛</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 발표자 룰렛</h1>
+      <p class="subtitle">다음 발표자는 누구?</p>
+    </header>
+
+    <div class="layout">
+      <!-- 왼쪽: 참가자 입력 -->
+      <aside class="panel card">
+        <h2>참가자</h2>
+        <div id="member-list"></div>
+        <div class="input-row">
+          <input type="text" id="name-input" placeholder="이름 입력 후 Enter" maxlength="8">
+          <button id="add-btn" class="btn btn-secondary">추가</button>
+        </div>
+        <p class="hint" id="count-hint">2명 이상 추가하세요</p>
+        <button id="reset-btn" class="btn btn-ghost" style="margin-top:12px;width:100%">🔄 전체 초기화</button>
+      </aside>
+
+      <!-- 오른쪽: 룰렛 -->
+      <main class="roulette-area">
+        <div class="wheel-wrap">
+          <!-- 포인터 -->
+          <div class="pointer">▼</div>
+          <canvas id="wheel-canvas"></canvas>
+        </div>
+
+        <button id="spin-btn" class="btn btn-spin" disabled>SPIN !</button>
+
+        <!-- 결과 오버레이 -->
+        <div id="result-overlay" class="hidden">
+          <div class="result-box">
+            <div class="result-char" id="result-char"></div>
+            <div class="result-name" id="result-name"></div>
+            <p class="result-sub">발표해 주세요! 👏</p>
+            <button id="close-btn" class="btn btn-primary">확인</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 히스토리 -->
+    <section id="history-section" class="card hidden">
+      <h2>📋 발표 기록</h2>
+      <div id="history-list"></div>
+      <button id="clear-history-btn" class="btn btn-ghost" style="margin-top:10px">기록 지우기</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
